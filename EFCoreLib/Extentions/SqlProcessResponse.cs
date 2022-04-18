@@ -29,6 +29,7 @@ public static class SqlProcessResponse
         {
             RecordId = recordId,
             ErrorMessage = ex.Message,
+            StackTrace = ex.StackTrace
         };
 
         if(ex is DbUpdateConcurrencyException)
@@ -98,7 +99,8 @@ public static class SqlProcessResponse
             Status = statusResponse.Status,
             RecordId = statusResponse.RecordId,
             ErrorMessage = statusResponse.ErrorMessage,
-            ErrorCode = statusResponse.ErrorCode
+            ErrorCode = statusResponse.ErrorCode,
+            StackTrace = statusResponse.StackTrace
         };
     }
 
