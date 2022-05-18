@@ -47,9 +47,9 @@ public class EntityContext<TEntity> : DbContext where TEntity : EntityBase
         return base.SaveChanges();
     }
 
-    //public TEntity GetEntity(Guid id)
-    //{
-    //    return ChangeTracker.Entries<TEntity>()
-    //        .FirstOrDefault(x => x.Entity.Id == id)?.Entity;
-    //}
+    public TEntity GetEntity(Guid id)
+    {
+        return ChangeTracker.Entries<TEntity>()
+            .FirstOrDefault(x => x.Entity.Id == id)?.Entity;
+    }
 }

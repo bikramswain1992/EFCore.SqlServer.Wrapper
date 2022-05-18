@@ -3,6 +3,7 @@ using EFCoreLib.Core.Contracts;
 using EFCoreLib.Core.DataContract;
 using EFCoreLib.Extentions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
 
 namespace EFCoreLib.Core;
@@ -15,6 +16,20 @@ public class EntityRepository<TEntity> : ReadEntityRepository<TEntity, TEntity, 
     {
         _context = context;
         _entity = context.Set<TEntity>();
+    }
+
+    public ActionResponse<TEntity, Guid> GetWithTracking(Guid id)
+    {
+        return ExecuteActionWithErrorHandeling(() => {
+            var result = _context.GetEntity(id);
+
+            var status = result != null ? ActionResponseStatus.Success : ActionResponseStatus.RecordNotFound;
+
+            var x = SqlProcessResponse.FormSqlResponse<Guid>(id, status);
+
+            return SqlProcessResponse.FormSqlResponse<Guid>(id, status).GetResult<TEntity, Guid>(result);
+
+        }, $"Failed to get {nameof(TEntity)} for Id {id}.");
     }
 
     public ActionResponse<TEntity, Guid> Get(Guid id)
@@ -107,5 +122,17 @@ public class EntityRepository<TEntity> : ReadEntityRepository<TEntity, TEntity, 
             return SqlProcessResponse.FormSqlResponse(entity.Id);
 
         }, $"Failed to update {nameof(TEntity)} for Id {nameof(entity)}.");
+    }
+
+    public IDbContextTransaction InitiateTransaction()
+    {
+        var transaction  = _context.Database.BeginTransaction();
+
+        return transaction;
+    }
+
+    public EntityContext<TEntity> GetContext()
+    {
+        return _context;
     }
 }
