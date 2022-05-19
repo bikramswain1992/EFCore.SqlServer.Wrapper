@@ -4,6 +4,17 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <PackageId>EFCore.SQLServer.Wrapper</PackageId>
+    <Authors>Bikram Swain</Authors>
+    <Product>EFCore SQLServer Wrapper</Product>
+    <Description>Provides easy configuration of EFCore SQL server with dependancy injection. Give access to basic functionalities with inbuilt error handeling and formatted result.</Description>
+    <Copyright></Copyright>
+    <RepositoryUrl>https://github.com/bikramswain1992/SharedLibrariesDotNet</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>EFCore SQLServer</PackageTags>
+    <PackageReleaseNotes>First version</PackageReleaseNotes>
+    <NeutralLanguage>en</NeutralLanguage>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
