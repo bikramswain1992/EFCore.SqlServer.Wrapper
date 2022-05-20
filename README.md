@@ -8,14 +8,14 @@ Library can be used to create single or multiple **DbContext** depending on the 
 
   public class Country : VersionedEntityBase  
   {  
-    public string Name {get; set;}  
-    public string IsdCode {get; set;}  
+      public string Name {get; set;}  
+      public string IsdCode {get; set;}  
   }  
     
   public class State : EntityBase  
   {  
-    public string Name {get; set;}  
-    public int Population {get; set;}  
-    public Guid CountryId {get; set;}  
+      public string Name {get; set;}  
+      public int Population {get; set;}  
+      public Guid CountryId {get; set;}  
   }  
 
